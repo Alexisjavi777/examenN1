@@ -99,6 +99,7 @@ void mostrarListado( string nombres[], double notas[], int cantidad);
 void calcularPromedio(double notas[], int cantidad);
 void mostrarMayorMenor(string nombres[], double notas[], int cantidad);
 void contarAprobadosReprobados(double notas[], int cantidad);
+void buscarEstudiante(string nombres[], double notas[], int cantidad);
 
 
 int main(){
@@ -138,6 +139,9 @@ string nombres[20];
         }
         else if (opcion == 5) {
             contarAprobadosReprobados(notas, cantidadRegistrados);
+        }
+        else if (opcion == 6) {
+            buscarEstudiante(nombres, notas, cantidadRegistrados);
         }
         
     } while (opcion != 7);
@@ -228,4 +232,34 @@ void contarAprobadosReprobados(double notas[], int cantidad) {
     }
     cout << "\nCantidad de aprobados (>= 14): " << aprobados << endl;
     cout << "Cantidad de reprobados (< 14): " << reprobados << endl;
+}
+
+// Pide un nombre y lo compara uno a uno con el arreglo 
+void buscarEstudiante(string nombres[], double notas[], int cantidad) {
+    string nombreABuscar;
+    bool encontrado = false; // Bandera para saber si lo hallamos
+
+    cout << "\nIngrese el nombre a buscar: ";
+    cin >> nombreABuscar;
+
+    for (int i = 0; i < cantidad; i++) {
+        // Compara el texto ingresado con cada posición del arreglo
+        if (nombres[i] == nombreABuscar) {
+            cout << "\nEstudiante encontrado:" << endl;
+            cout << "Nombre: " << nombres[i] << endl;
+            cout << "Nota: " << notas[i] << endl;
+            
+            // Determina estado solo para el estudiante encontrado
+            if (notas[i] >= 14) {
+                cout << "Estado: APROBADO" << endl;
+            } else {
+                cout << "Estado: REPROBADO" << endl;
+            }
+            
+            encontrado = true; 
+            break; // Salimos del bucle porque ya lo encontramos
+        }
+    }if (!encontrado) { // Si al recorrer todo el arreglo 'encontrado' = false
+        cout << "\nEl estudiante '" << nombreABuscar << "' no fue encontrado." << endl;
+    }
 }
