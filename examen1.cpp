@@ -97,6 +97,7 @@ using namespace std;
 void registrarEstudiantes(string nombres[], double notas[], int &cantidad);
 void mostrarListado( string nombres[], double notas[], int cantidad);
 void calcularPromedio(double notas[], int cantidad);
+void mostrarMayorMenor(string nombres[], double notas[], int cantidad);
 
 
 int main(){
@@ -130,6 +131,9 @@ string nombres[20];
         }
         else if (opcion == 3) {
             calcularPromedio(notas, cantidadRegistrados);
+        }
+        else if (opcion == 4) {
+            mostrarMayorMenor(nombres, notas, cantidadRegistrados);
         }
         
     } while (opcion != 7);
@@ -180,4 +184,27 @@ void calcularPromedio(double notas[], int cantidad) {
         suma = suma + notas[i];
     }
     cout << "\nPromedio: " << (suma / cantidad) << endl;
+}
+
+// Busca el valor más alto y el más bajo dentro del arreglo de notas
+void mostrarMayorMenor(string nombres[], double notas[], int cantidad) {
+    double mayor = notas[0]; 
+    double menor = notas[0]; 
+    int posMayor = 0; 
+    int posMenor = 0;
+
+    for (int i = 1; i < cantidad; i++) {
+        // Encuentra la nota mayor y la guarda
+        if (notas[i] > mayor) {
+            mayor = notas[i];
+            posMayor = i;
+        }
+        // Encuentra la nota menor y la guarda
+        if (notas[i] < menor) {
+            menor = notas[i];
+            posMenor = i;
+        }
+    }
+    cout << "\nNota mayor: " << mayor << " (Estudiante: " << nombres[posMayor] << ")" << endl;
+    cout << "Nota menor: " << menor << " (Estudiante: " << nombres[posMenor] << ")" << endl;
 }
