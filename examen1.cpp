@@ -98,6 +98,7 @@ void registrarEstudiantes(string nombres[], double notas[], int &cantidad);
 void mostrarListado( string nombres[], double notas[], int cantidad);
 void calcularPromedio(double notas[], int cantidad);
 void mostrarMayorMenor(string nombres[], double notas[], int cantidad);
+void contarAprobadosReprobados(double notas[], int cantidad);
 
 
 int main(){
@@ -134,6 +135,9 @@ string nombres[20];
         }
         else if (opcion == 4) {
             mostrarMayorMenor(nombres, notas, cantidadRegistrados);
+        }
+        else if (opcion == 5) {
+            contarAprobadosReprobados(notas, cantidadRegistrados);
         }
         
     } while (opcion != 7);
@@ -207,4 +211,21 @@ void mostrarMayorMenor(string nombres[], double notas[], int cantidad) {
     }
     cout << "\nNota mayor: " << mayor << " (Estudiante: " << nombres[posMayor] << ")" << endl;
     cout << "Nota menor: " << menor << " (Estudiante: " << nombres[posMenor] << ")" << endl;
+}
+
+// Clasifica a los estudiantes según su nota y cuenta los grupos
+void contarAprobadosReprobados(double notas[], int cantidad) {
+    int aprobados = 0; // Contador de aprobados
+    int reprobados = 0; // Contador de reprobados
+
+    for (int i = 0; i < cantidad; i++) {
+        // Condición, 14 o más es aprobado
+        if (notas[i] >= 14) {
+            aprobados++;
+        } else {
+            reprobados++;
+        }
+    }
+    cout << "\nCantidad de aprobados (>= 14): " << aprobados << endl;
+    cout << "Cantidad de reprobados (< 14): " << reprobados << endl;
 }
