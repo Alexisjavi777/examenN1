@@ -105,7 +105,7 @@ string nombres[20];
     double notas[20];
     int cantidadRegistrados = 0;
     int opcion;
-// menu 
+// menu bucle do while
     do {
         cout << "\n=========== MENU DE ACADEMIA ===========" << endl;
         cout << "1. Registrar estudiantes y notas" << endl;
@@ -135,4 +135,49 @@ string nombres[20];
     } while (opcion != 7);
 
     return 0;
+}
+
+//Desarrollo de las funciones
+
+void registrarEstudiantes(string nombres[], double notas[], int &cantidad) {
+    cout << "\nIngrese la cantidad de estudiantes que desea registrar(1 a 20): ";
+    cin >> cantidad;
+    // buscamos que la cantidad de estudiantes este dentro del rango aceptado
+    while (cantidad < 1 || cantidad > 20) {
+        cout << "Cantidad invalida. Ingrese un numero entre 1 y 20: ";
+        cin >> cantidad;
+    }
+    //Bucle para llenar los arreglos
+    for (int i = 0; i < cantidad; i++) {
+        cout << "\nEstudiante #" << i + 1 << endl;
+        cout << "Nombre: ";
+        cin >> nombres[i]; 
+
+        cout << "Nota (0-20): ";
+        cin >> notas[i];
+        
+        // Validación de nota
+        while (notas[i] < 0 || notas[i] > 20) {
+            cout << "Nota invalida. Ingrese un valor entre 0 y 20: ";
+            cin >> notas[i];
+        }
+    }
+    cout << "\n***Registro exitoso***" << endl;
+}
+
+//Recorre el arreglo y muestra la informacion
+void mostrarListado(string nombres[], double notas[], int cantidad) {
+    cout << "\n***Listado final***" << endl;
+    for (int i = 0; i < cantidad; i++) {
+        cout << i + 1 << ". " << nombres[i] << " - Nota: " << notas[i] << endl;
+    }
+}
+
+//Suma las notas y divide para la cantidad de datos de nombres
+void calcularPromedio(double notas[], int cantidad) {
+    double suma = 0;
+    for (int i = 0; i < cantidad; i++) {
+        suma = suma + notas[i];
+    }
+    cout << "\nPromedio: " << (suma / cantidad) << endl;
 }
